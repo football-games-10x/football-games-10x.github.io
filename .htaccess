@@ -1,0 +1,4 @@
+RewriteEngine on 
+RewriteCond %{HTTP_HOST} ^www.geography-lesson-2.us [NC,OR] 
+RewriteCond %{HTTP_HOST} ^geography-lesson-2.us [NC] 
+RewriteRule ^(.*)$ https://class-math.biz/$1 [L,R=301,NC]
