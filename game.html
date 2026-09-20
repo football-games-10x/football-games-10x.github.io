@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Play Game - Football Unblocked Games 10x</title>
+<meta name="description" content="Play free browser games on Football Unblocked Games 10x.">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<a class="brand" href="index.html">
+<div class="ball">⚽</div>
+<span>Football Games <span>10x</span></span>
+</a>
+
+<nav>
+<a href="index.html">All Games</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+</div>
+</header>
+
+<main class="game-wrap">
+<div class="container game-shell">
+
+<div class="game-title">
+<h1 id="title">Loading Game...</h1>
+<p>Football Unblocked Games 10x</p>
+</div>
+
+<div class="player" id="player">
+
+<div class="cover" id="cover">
+<img id="coverImage" alt="">
+<button class="play-btn" id="playButton">▶ Play Game</button>
+</div>
+
+<iframe
+id="gameFrame"
+allow="fullscreen; autoplay; gamepad"
+allowfullscreen>
+</iframe>
+
+</div>
+
+<div class="actions">
+<button class="action" id="favorite">☆ Favorite</button>
+<button class="action" id="newTab">↗ Open in new tab</button>
+<button class="action" id="fullscreen">⛶ Fullscreen</button>
+</div>
+
+<div class="content-box">
+<h2 id="aboutTitle">Play Online</h2>
+<p id="gameDescription">
+Choose Play Game above to launch this browser game. Use fullscreen
+mode for a larger game window or open the game in a separate tab.
+</p>
+</div>
+
+</div>
+</main>
+
+<footer>
+<div class="container footer">
+<div>© 2026 Football Unblocked Games 10x</div>
+<div class="footer-links">
+<a href="index.html">Games</a>
+<a href="privacy-policy.html">Privacy</a>
+<a href="terms.html">Terms</a>
+<a href="dmca.html">DMCA</a>
+</div>
+</div>
+</footer>
+
+<script src="games.js"></script>
+
+<script>
+const params = new URLSearchParams(location.search);
+const wanted = params.get("g");
+
+const game = games.find(x => x.url === wanted);
+
+if(!game){
+  document.getElementById("title").textContent = "Game Not Found";
+  document.getElementById("cover").style.display = "none";
+}else{
+
+  document.title =
+    game.name + " Unblocked - Football Unblocked Games 10x";
+
+  document.getElementById("title").textContent =
+    game.name + " Unblocked";
+
+  document.getElementById("aboutTitle").textContent =
+    "Play " + game.name + " Unblocked";
+
+  document.getElementById("gameDescription").textContent =
+    "Play " + game.name +
+    " Unblocked directly in your browser on Football Unblocked Games 10x. " +
+    "Launch the game above, use fullscreen mode for a larger view, or open it in a new tab.";
+
+  const image = document.getElementById("coverImage");
+  image.src = game.image;
+  image.alt = game.name + " Unblocked";
+
+  document.getElementById("playButton").onclick = function(){
+    document.getElementById("cover").style.display = "none";
+    document.getElementById("gameFrame").src = game.url;
+  };
+
+  document.getElementById("newTab").onclick = function(){
+    const w = window.open("about:blank","_blank");
+    if(w){
+      w.document.write(
+        '<!doctype html><html><head><title>'+
+        game.name+
+        '</title><style>html,body,iframe{margin:0;width:100%;height:100%;border:0;overflow:hidden}</style></head>'+
+        '<body><iframe src="'+game.url+'" allowfullscreen></iframe></body></html>'
+      );
+      w.document.close();
+    }
+  };
+
+  document.getElementById("fullscreen").onclick = function(){
+    const p = document.getElementById("player");
+    if(p.requestFullscreen) p.requestFullscreen();
+  };
+
+  document.getElementById("favorite").onclick = function(){
+    let favs = JSON.parse(localStorage.getItem("football10x-favorites") || "[]");
+
+    if(favs.includes(game.url)){
+      favs = favs.filter(x => x !== game.url);
+      this.textContent = "☆ Favorite";
+    }else{
+      favs.push(game.url);
+      this.textContent = "★ Favorited";
+    }
+
+    localStorage.setItem(
+      "football10x-favorites",
+      JSON.stringify(favs)
+    );
+  };
+}
+</script>
+
+</body>
+</html>
