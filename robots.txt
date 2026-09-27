@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://football-games-10x.github.io/sitemap.xml
